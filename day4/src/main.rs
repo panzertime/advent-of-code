@@ -18,9 +18,9 @@ fn main() {
         let mut count = 0;
 
         for token in phrase {
-            memory.insert(token.to_string());
+            memory.insert(anagram(& token.to_string()));
             count = count + 1;
-            println!("{:?}", token);
+            //println!("{:?}", token);
         }
 
         if count == memory.len() {
@@ -29,4 +29,18 @@ fn main() {
     }
 
     print!("Total count of valid passphrases is {}", phrases);
+}
+
+// to check for anagrams, simply transform every token into an alphabetized version of itself
+fn anagram(s: &String) -> String {
+    let mut buf = Vec::<char>::new();
+    let mut ret = String::new();
+    for character in s.chars() {
+        buf.push(character);
+    }
+    buf.sort_unstable();
+    for character in buf {
+        ret.push(character);
+    }
+    return ret
 }
