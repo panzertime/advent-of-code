@@ -28,7 +28,12 @@ fn main() {
             return
         }
         let buf = tape[uhead];
-        tape[uhead] = tape[uhead] + 1;
+        if buf > 2 {
+            tape[uhead] = tape[uhead] - 1;
+        }
+        else {
+            tape[uhead] = tape[uhead] + 1;
+        }
         head = head + buf;
         steps = steps + 1;
     }
