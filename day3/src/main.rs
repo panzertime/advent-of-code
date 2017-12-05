@@ -36,36 +36,6 @@ fn main() {
         // continue
     }
 
-// change this loop to "while step <= target"
-//    for mut step in (1..target) {
-//        // this can be done by tracking side length and counting in the various directions one at a time
-//        // 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 etc.
-//        for _substep in (1..len) {
-//            step = step + 1;
-//            x = x + 1;
-//            println!("({},{})", x, y);
-//        }
-//        for _substep in (1..len) {
-//            step = step + 1;
-//            y = y + 1;
-//            println!("({},{})", x, y);
-//        }
-//        len = len + 1;
-//        for _substep in (1..len) {
-//            step = step + 1;
-//            x = x - 1;
-//            println!("({},{})", x, y);
-//        }
-//        for _substep in (1..len) {
-//            step = step + 1;
-//            y = y -1;
-//            println!("({},{})", x, y);
-//        }
-//    }
-//    println!("Final Manhattan distance: {}", manhattan(x, y));
-
-}
-
 fn manhattan(x: i32, y: i32) -> i32 {
     return x.abs() + y.abs();
 }
