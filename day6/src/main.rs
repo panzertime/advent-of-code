@@ -1,7 +1,7 @@
 use std::io::BufReader;
 use std::io::BufRead;
 use std::fs::File;
-use std::collections::HashSet;
+//use std::collections::HashSet;
 use std::env;
 
 fn main() {
@@ -19,7 +19,7 @@ fn main() {
             cells.push(cell.parse::<i32>().unwrap());
         }
 
-        let mut memory = HashSet::<Vec<i32>>::new();
+        let mut memory = Vec::<Vec<i32>>::new();
         let mut steps = 0;
 
         loop {
@@ -27,13 +27,29 @@ fn main() {
             let balanced = balance(cells);
 
             if memory.contains(&balanced) {
-                println!("Loop after {} steps", steps);
+                //println!("Loop after {} steps", steps);
+                println!("Minimum loop size is {}", steps - search(memory, balanced) - 1);
                 return
             }
             cells = balanced.clone();
-            memory.insert(balanced);
+            memory.push(balanced);
         }
     }
+}
+
+fn search(space: Vec<Vec<i32>>, word: Vec<i32>) -> i32{
+    for candidate in space {
+        let mut flag = true;
+        for i in 1..candidate.len() {
+            if candidate[i-1] != word[i-1] {
+                flag = false;
+            }
+            if flag {
+                return (i - 1) as i32;
+            }
+        }
+    }
+    return 0;
 }
 
 fn balance(mut input: Vec<i32>) -> Vec<i32> {
