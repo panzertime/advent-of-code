@@ -21,14 +21,22 @@ fn main() {
 
         let mut memory = Vec::<Vec<i32>>::new();
         let mut steps = 0;
+        let mut in_loop = false;
 
         loop {
             steps = steps + 1;
             let balanced = balance(cells);
 
-            if memory.contains(&balanced) {
+            if memory.contains(&balanced) && !in_loop {
+                in_loop = true;
+                steps = 0;
+                memory.clear();
                 //println!("Loop after {} steps", steps);
-                println!("Minimum loop size is {}", steps - search(memory, balanced) - 1);
+                //println!("Minimum loop size is {}", steps - search(memory, balanced) - 1);
+            }
+            if memory.contains(&balanced) && in_loop {
+                println!("Loop period is {} steps", steps);
+                //println!("Minimum loop size is {}", steps - search(memory, balanced) - 1);
                 return
             }
             cells = balanced.clone();
